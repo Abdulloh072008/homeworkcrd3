@@ -54,10 +54,10 @@ const App = () => {
       get()
     } catch (error) {
       console.error(error);
-
+      
     }
   }
-
+  
   async function HandleSubmitEdit(event) {
     event.preventDefault()
     try {
@@ -66,25 +66,27 @@ const App = () => {
         img: imgEdit,
         city: cityEdit,
         age: ageEdit,
-        status: statusEdit == true,
-      })
+        status: statusEdit == "true",
+      })      
       get()
     } catch (error) {
       console.error(error);
-
+      
     }
   }
+  
 
+  
   async function deleteuser(id) {
     try {
       await axios.delete(`${api}/${id}`)
       get()
     } catch (error) {
       console.error(error);
-
+      
     }
   }
-
+  
   async function changestatu(user) {
     try {
       await axios.put(`${api}/${user.id}`, {
@@ -94,11 +96,48 @@ const App = () => {
       get()
     } catch (error) {
       console.error(error);
+      
+    }
+  }
+  
+  async function sel(s) {
+    try {
 
+if(s==""){
+        get()
+      }
+      else{
+        let {data}=await axios.get(`${api}?status=${s}`)
+        setData(data)
+
+      }
+
+    } catch (error) {
+      console.error(error);
     }
   }
 
 
+
+  async function serachname(name) {
+    try {
+      
+      if(name==""){
+        get()
+      }
+      
+      else{
+        
+        let {data}=await axios.get(`${api}?name=${name}`)
+        setData(data)
+        
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  }
+  
+  
   return (
     <>
       <section className='p-20'>
@@ -130,10 +169,15 @@ const App = () => {
               <button type='submit' className='bg-[blue] py-2 px-5 rounded-2xl text-white'>Edit</button>
             </form>
           </div>
-
           <div>
-            <input value={search} onChange={(user) => setsearch(user.target.value)} name='avatar' className='border p-2 rounded-2xl outline-none' type="search" placeholder='Name' />
-            <select value={select} onChange={(user) => setselect(user.target.value)} className='border p-2 rounded-2xl outline-none' name="status" id="">
+            <input value={search} onChange={(e)=>{
+              setsearch(e.target.value)
+              serachname(e.target.value)
+            }}  name='avatar' className='border p-2 rounded-2xl outline-none' type="search" placeholder='Name' />
+            <select value={select} onChange={(e)=>{
+              setselect(e.target.value)
+              sel(e.target.value)
+            }} className='border p-2 rounded-2xl outline-none' name="status" id="">
               <option value="">All</option>
               <option value="true">Active</option>
               <option value="false">Inactive</option>
