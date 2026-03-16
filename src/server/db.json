@@ -1,0 +1,20 @@
+{
+  "data": [
+    {
+      "name": "Orzu",
+      "img": "/src/assets/image.png",
+      "city": "Dushanbe",
+      "age": "211",
+      "status": true,
+      "id": "1"
+    },
+    {
+      "name": "Bilol",
+      "img": "/src/assets/image.png",
+      "city": "Dushanbe",
+      "age": 34,
+      "status": false,
+      "id": "2"
+    }
+  ]
+}
